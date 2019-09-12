@@ -1,22 +1,23 @@
 import React from 'react';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'; // gwa added on 20190911 to activate Bootstrap
 import NavigationBar from './components/NavigationBar';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-
-import SignUp from './components/SignUp'
-import Home from './components/Home'
-
-import 'bootstrap/dist/css/bootstrap.min.css'; //gwa added on 20190911 to activate Bootstrap
+import SignUpForm from './components/SignUpForm';
+import Login from './components/Login';
+import Home from './components/Home';
 
 function App() {
   return (
-    <Router >
-    <div className="container">
-    <NavigationBar/>
-    <Switch>
-      <Route path ='/signup' component ={SignUp}/>
-      <Route path ='/' component ={Home}/>
-       </Switch>
-    </div>
+    <Router>
+      <div className="container">
+        <NavigationBar />
+        <Switch>
+          <Route path="/signup" component={SignUpForm} />
+          <Route path="/login" component={Login} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </div>
     </Router>
   );
 }

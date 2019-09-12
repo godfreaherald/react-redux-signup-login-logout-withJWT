@@ -1,36 +1,32 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { userLoginFetch } from '../actions/actions';
 
-import { userPostFetch } from '../actions/actions';
-
-class SignUpForm extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
-    const initState = {
+    this.state = {
       email: '',
-      name: '',
-      password: '',
-      password2: ''
+      password: ''
     };
-    this.state = initState;
   }
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-
-    this.props.userPostFetch(this.state, this.props.history);
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.userLoginFetch(this.state);
   };
 
   render() {
     return (
       <div className="container">
-        <h2 style={{ marginBottom: '40px' }}>Registration</h2>
+        <h2 style={{ marginBottom: '40px' }}>Login</h2>
 
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
@@ -50,20 +46,6 @@ class SignUpForm extends Component {
                     onChange={this.handleChange}
                   />
                 </div>
-                <div className="form-group">
-                  <label className="label-control" htmlFor="name">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="form-control"
-                    placeholder="Full Name"
-                    value={this.state.name}
-                    onChange={this.handleChange}
-                  />
-                </div>
 
                 <div className="form-group">
                   <label className="label-control" htmlFor="password">
@@ -80,23 +62,10 @@ class SignUpForm extends Component {
                     onChange={this.handleChange}
                   />
                 </div>
-                <div className="form-group">
-                  <label className="label-control" htmlFor="password2">
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password2"
-                    id="password2"
-                    className="form-control"
-                    placeholder="Confirm Password"
-                    value={this.state.password2}
-                    onChange={this.handleChange}
-                  />
-                </div>
+
                 <div className="form-group">
                   <button type="submit" className="btn btn-primary btn-lg">
-                    Register
+                    Login
                   </button>
                 </div>
               </form>
@@ -107,11 +76,12 @@ class SignUpForm extends Component {
     );
   }
 }
+
 const mapDispatchToProps = dispatch => ({
-  userPostFetch: userInfo => dispatch(userPostFetch(userInfo))
+  userLoginFetch: userData => dispatch(userLoginFetch(userData))
 });
 
 export default connect(
   null,
   mapDispatchToProps
-)(withRouter(SignUpForm));
+)(withRouter(Login));
