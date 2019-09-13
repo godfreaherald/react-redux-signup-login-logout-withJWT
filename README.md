@@ -35,3 +35,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ## Getting Started
 
 1. If your backend is not yet set up, follow the [guide here](https://github.com/godfreaherald/HeraldRegisterLoginWithJwt_Passport.git) to get it set up before you start the frontend app.
+
+## Not yet done
+
+1. Creating a config file for enviromental variables
+2. Validation of user inputs
+3. Route redirection upon login .
