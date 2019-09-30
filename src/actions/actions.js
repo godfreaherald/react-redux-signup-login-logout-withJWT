@@ -10,8 +10,9 @@ const getErrors = payload => ({
 });
 
 export const userPostFetch = user => {
+  console.log(user);
   return dispatch => {
-    return fetch('http://localhost:8000/users', {
+    return fetch('http://localhost:8000/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,16 +20,15 @@ export const userPostFetch = user => {
       },
       body: JSON.stringify(user)
     })
-      .then(resp => resp.json())
-      .then(data => {
-        if (data.errors) {
-          dispatch(getErrors(data.errors));
-        } else {
+      .then(res => {
+        if (res.status === 201) {
           history.push('/login');
+        } else {
+          dispatch(getErrors(res.json()));
         }
       })
       .catch(err => {
-        dispatch(getErrors(err.response));
+        dispatch(getErrors(err));
       });
   };
 };
@@ -41,17 +41,20 @@ export const userLoginFetch = user => {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify({ user })
+      body: JSON.stringify(user)
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.errors) {
-          dispatch(getErrors(data.errors));
-        } else {
-          localStorage.setItem('token', data.jwt);
+      .then(res => {
+        const data = res.json();
+        if (res.status === 200) {
+          localStorage.setItem('token', data.token);
           dispatch(loginUser(data.user));
           history.push('/');
+        } else {
+          dispatch(getErrors(data));
         }
+      })
+      .catch(err => {
+        dispatch(getErrors(err));
       });
   };
 };
