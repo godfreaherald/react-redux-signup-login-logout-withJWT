@@ -1,3 +1,5 @@
+import { history } from '../_helpers';
+
 const loginUser = user => ({
   type: 'LOGIN_USER',
   payload: user
@@ -7,9 +9,9 @@ const getErrors = payload => ({
   payload
 });
 
-export const userPostFetch = (user, history) => {
+export const userPostFetch = user => {
   return dispatch => {
-    return fetch('http://localhost:5000/users/register', {
+    return fetch('http://localhost:8000/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,9 +33,9 @@ export const userPostFetch = (user, history) => {
   };
 };
 
-export const userLoginFetch = (user, history) => {
+export const userLoginFetch = user => {
   return dispatch => {
-    return fetch('http://localhost:5000/users/login', {
+    return fetch('http://localhost:8000/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

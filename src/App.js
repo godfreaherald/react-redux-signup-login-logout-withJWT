@@ -6,10 +6,11 @@ import NavigationBar from './components/NavigationBar';
 import SignUpForm from './components/SignUpForm';
 import Login from './components/Login';
 import Home from './components/Home';
+import { history } from './_helpers';
 
 function App() {
   return (
-    <Router>
+    <Router history={history}>
       <div className="container">
         <NavigationBar />
         <Switch>

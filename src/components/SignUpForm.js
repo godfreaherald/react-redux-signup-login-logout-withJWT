@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { userPostFetch } from '../actions/actions';
@@ -24,7 +24,7 @@ class SignUpForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.userPostFetch(this.state, this.props.history);
+    this.props.userPostFetch(this.state);
   };
 
   render() {
@@ -114,4 +114,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(withRouter(SignUpForm));
+)(SignUpForm);
